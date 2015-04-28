@@ -89,7 +89,7 @@ namespace Plaza
                 // создаем объект "входящий поток репликации" для потока агрегированых заявок
                 m_streamAggregates = new CP2DataStreamClass();
                 m_streamAggregates.DBConnString = "";
-                m_streamAggregates.type = TRequestType.RT_COMBINED_DYNAMIC;
+                m_streamAggregates.type = TRequestType.RT_COMBINED_DYNAMIC; // RT_REMOTE_ONLINE
                 m_streamAggregates.StreamName = streamAggregatesID;
                 m_streamAggregates.TableSet = new CP2TableSetClass();
                 m_streamAggregates.TableSet.InitFromIni("orders_aggr.ini", "");
@@ -98,7 +98,7 @@ namespace Plaza
                 // создаем объект "входящий поток репликации" для потока агрегированых заявок
                 m_streamTrades = new CP2DataStreamClass();
                 m_streamTrades.DBConnString = "";
-                m_streamTrades.type = TRequestType.RT_COMBINED_DYNAMIC;
+                m_streamTrades.type = TRequestType.RT_COMBINED_DYNAMIC; // RT_REMOTE_ONLINE
                 m_streamTrades.StreamName = streamTradesID;
                 m_streamTrades.TableSet = new CP2TableSetClass();
                 m_streamTrades.TableSet.InitFromIni2("forts_scheme.ini", "FutTrade");
@@ -293,7 +293,7 @@ namespace Plaza
                         try
                         {
                             Value = rec.GetValAsString(Field);
-                            SaveDeal(Fields.Split(',')[i], Value);
+                            SaveDeal(DateTime.Now.ToString() + " " + Fields.Split(',')[i], Value);
                         }
                         catch (System.Exception e)
                         {
